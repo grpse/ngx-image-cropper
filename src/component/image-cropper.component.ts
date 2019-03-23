@@ -53,6 +53,14 @@ export class ImageCropperComponent implements OnChanges {
         this.loadBase64Image(imageBase64);
     }
 
+    @Input()
+    set cropSetOriginalSize(size : {width:number, height: number}) {
+        setInterval(_ => {
+            this.originalSize.width = size.width;
+            this.originalSize.height = size.height;
+        }, 500);
+    }
+
     @Input() format: 'png' | 'jpeg' | 'bmp' | 'webp' | 'ico' = 'png';
     @Input() outputType: OutputType = 'both';
     @Input() maintainAspectRatio = true;

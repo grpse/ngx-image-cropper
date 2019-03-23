@@ -21,6 +21,10 @@ export declare class ImageCropperComponent implements OnChanges {
     imageFileChanged: File;
     imageChangedEvent: any;
     imageBase64: string;
+    cropSetOriginalSize: {
+        width: number;
+        height: number;
+    };
     format: 'png' | 'jpeg' | 'bmp' | 'webp' | 'ico';
     outputType: OutputType;
     maintainAspectRatio: boolean;
