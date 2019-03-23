@@ -55,10 +55,8 @@ export class ImageCropperComponent implements OnChanges {
 
     @Input()
     set cropSetOriginalSize(size : {width:number, height: number}) {
-        setInterval(_ => {
-            this.originalSize.width = size.width;
-            this.originalSize.height = size.height;
-        }, 500);
+        this.originalSize.width = size.width;
+        this.originalSize.height = size.height;
     }
 
     @Input() format: 'png' | 'jpeg' | 'bmp' | 'webp' | 'ico' = 'png';
