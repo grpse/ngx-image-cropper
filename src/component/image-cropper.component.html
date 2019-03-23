@@ -3,7 +3,7 @@
         #sourceImage
         class="source-image"
         [src]="safeImgDataUrl"
-        [style.visibility]="imageVisible ? 'visible' : 'hidden'"
+        [style.visibility]="'hidden'"
         (load)="imageLoadedInView()"
     />
     <div class="cropper"
@@ -14,7 +14,7 @@
          [style.width.px]="cropper.x2 - cropper.x1"
          [style.height.px]="cropper.y2 - cropper.y1"
          [style.margin-left]="alignImage === 'center' ? marginLeft : null"
-         [style.visibility]="imageVisible ? 'visible' : 'hidden'"
+         [style.visibility]="'visible'"
     >
         <div
                 (mousedown)="startMove($event, 'move')"
