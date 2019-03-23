@@ -2,16 +2,10 @@
   "name": "ngx-image-cropper",
   "version": "1.3.8",
   "description": "An image cropper for Angular",
-  "main": "./dist/bundles/ngx-image-cropper.umd.js",
-  "module": "./dist/ngx-image-cropper/ngx-image-cropper.es5.js",
-  "es2015": "./dist/ngx-image-cropper/ngx-image-cropper.js",
-  "scripts": {
-    "transpile": "ngc",
-    "build": "ng-packagr -p ng-package.json",
-    "pack-lib": "npm pack ./dist",
-    "publish-lib": "npm publish ./dist"
-  },
-  "typings": "./dist/ngx-image-cropper.d.ts",
+  "main": "bundles/ngx-image-cropper.umd.js",
+  "module": "fesm5/ngx-image-cropper.js",
+  "es2015": "fesm2015/ngx-image-cropper.js",
+  "typings": "ngx-image-cropper.d.ts",
   "author": "Martijn Willekens",
   "repository": {
     "type": "git",
@@ -47,5 +41,14 @@
     "rxjs": "^6.0.0",
     "typescript": "~2.7.2",
     "zone.js": "~0.8.26"
+  },
+  "esm5": "esm5/ngx-image-cropper.js",
+  "esm2015": "esm2015/ngx-image-cropper.js",
+  "fesm5": "fesm5/ngx-image-cropper.js",
+  "fesm2015": "fesm2015/ngx-image-cropper.js",
+  "metadata": "ngx-image-cropper.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
   }
 }
