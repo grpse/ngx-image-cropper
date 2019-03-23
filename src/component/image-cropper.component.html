@@ -4,8 +4,10 @@
         class="source-image"
         [src]="safeImgDataUrl"
         [style.visibility]="'hidden'"
-        (load)="imageLoadedInView()"
-    />
+        [style.width]="'100%'"
+        [style.height]="'100%'"
+        (load)="imageLoadedInView()"/>
+
     <div class="cropper"
          *ngIf="imageVisible"
          [class.rounded]="roundCropper"
