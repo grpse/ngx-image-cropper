@@ -465,6 +465,7 @@ export class ImageCropperComponent implements OnChanges {
     set customCropper(cropper : Rect) {
 
         if (this._canUseCustomData) {
+            this.imageVisible = true;
             this.cropper = cropper;
         }
     }
@@ -474,6 +475,7 @@ export class ImageCropperComponent implements OnChanges {
 
         if (!this._canUseCustomData) return;
 
+        this.imageVisible = true;
         if (this.sourceImage.nativeElement && this.originalImage != null) {
             this.startCropImage.emit();
             const width = imagePosition.x2 - imagePosition.x1;
