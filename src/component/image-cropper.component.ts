@@ -9,6 +9,8 @@ import { resizeCanvas } from '../utils/resize.utils';
 
 export type OutputType = 'base64' | 'file' | 'both';
 
+export type Rect = {x1 : number, y1 : number, x2 : number, y2: number}
+
 @Component({
     selector: 'image-cropper',
     templateUrl: './image-cropper.component.html',
@@ -449,6 +451,61 @@ export class ImageCropperComponent implements OnChanges {
     private doAutoCrop(): void {
         if (this.autoCrop) {
             this.crop();
+        }
+    }
+
+    private _canUseCustomData : boolean = false;
+
+    @Input()
+    set canUseCustomData(canUseCustom : boolean) {
+        this._canUseCustomData = canUseCustom;
+    }
+
+    @Input()
+    set customCropper(cropper : Rect) {
+
+        if (this._canUseCustomData) {
+            this.cropper = cropper;
+        }
+    }
+    
+    @Input() 
+    set customImagePosition(imagePosition : Rect) {
+
+        if (!this._canUseCustomData) return;
+
+        if (this.sourceImage.nativeElement && this.originalImage != null) {
+            this.startCropImage.emit();
+            const width = imagePosition.x2 - imagePosition.x1;
+            const height = imagePosition.y2 - imagePosition.y1;
+
+            const cropCanvas = document.createElement('canvas') as HTMLCanvasElement;
+            cropCanvas.width = width;
+            cropCanvas.height = height;
+
+            const ctx = cropCanvas.getContext('2d');
+            if (ctx) {
+                ctx.drawImage(
+                    this.originalImage,
+                    imagePosition.x1,
+                    imagePosition.y1,
+                    width,
+                    height,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+                const output = {width, height, imagePosition, cropperPosition: {...this.cropper}};
+                const resizeRatio = this.getResizeRatio(width);
+                if (resizeRatio !== 1) {
+                    output.width = Math.floor(width * resizeRatio);
+                    output.height = Math.floor(height * resizeRatio);
+                    resizeCanvas(cropCanvas, output.width || width, output.height || height);
+                }
+
+                this.cropToOutputType(this.outputType, cropCanvas, output);
+            }
         }
     }
 

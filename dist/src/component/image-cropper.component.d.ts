@@ -2,6 +2,12 @@ import { ElementRef, EventEmitter, OnChanges, SimpleChanges, ChangeDetectorRef, 
 import { DomSanitizer, SafeUrl, SafeStyle } from '@angular/platform-browser';
 import { CropperPosition, ImageCroppedEvent } from '../interfaces';
 export declare type OutputType = 'base64' | 'file' | 'both';
+export declare type Rect = {
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+};
 export declare class ImageCropperComponent implements OnChanges {
     private sanitizer;
     private cd;
@@ -70,6 +76,10 @@ export declare class ImageCropperComponent implements OnChanges {
     private resize(event);
     private checkAspectRatio();
     private doAutoCrop();
+    private _canUseCustomData;
+    canUseCustomData: boolean;
+    customCropper: Rect;
+    customImagePosition: Rect;
     crop(outputType?: OutputType): ImageCroppedEvent | Promise<ImageCroppedEvent> | null;
     private getImagePosition();
     private cropToOutputType(outputType, cropCanvas, output);
